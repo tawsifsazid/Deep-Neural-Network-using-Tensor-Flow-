@@ -1,4 +1,4 @@
-# author : Muhammad Tawsif Sazid
+#Author: Muhammad Tawsif Sazid
 
 import os
 import math
@@ -153,15 +153,19 @@ def model(X_train, Y_train, X_test, Y_test, learning_rate, num_epochs, mini_batc
             #print(str(num_mini_batches))
             seed = seed + 1
             minibatches = random_mini_batches(X_train, Y_train, mini_batch_size, seed)
-            _ , minibatch_cost = sess.run([optimizer,cost] , feed_dict ={X:X_train, Y:Y_train})
             
-            epoch_cost += minibatch_cost/num_mini_batches
-            
+            for minibatch in minibatches:
+                
+                (minibatch_X, minibatch_Y) = minibatch
+                _ , minibatch_cost = sess.run([optimizer,cost] , feed_dict ={X:minibatch_X, Y:minibatch_Y})
+
+                epoch_cost += minibatch_cost/num_mini_batches
+
             if print_cost == True and epoch % 100 == 0:
                 print ("Cost after epoch %i: %f" % (epoch, epoch_cost))
             if print_cost == True and epoch % 5 == 0:
                 costs.append(epoch_cost)
-            
+
         plt.plot(np.squeeze(costs))
         plt.ylabel('cost')
         plt.xlabel('iterations (per tens)')
@@ -270,8 +274,16 @@ def main_func():
     
     print("Hello World in Deep Learning")
     X_train, X_test, Y_train, Y_test = data_input_and_process_function()
-    parameters = model(X_train, Y_train, X_test, Y_test, learning_rate = 0.0001, num_epochs = 2000, mini_batch_size = 64)
+    parameters = model(X_train, Y_train, X_test, Y_test, learning_rate = 0.0001, num_epochs = 1500, mini_batch_size = 64)
     
 
 main_func()
     
+
+# Input data files are available in the "../input/" directory.
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+
+
+
+# Any results you write to the current directory are saved as output.
