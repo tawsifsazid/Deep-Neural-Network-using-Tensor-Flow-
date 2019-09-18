@@ -280,10 +280,3 @@ def main_func():
 main_func()
     
 
-# Input data files are available in the "../input/" directory.
-# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
-
-
-
-
-# Any results you write to the current directory are saved as output.
